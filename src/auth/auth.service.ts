@@ -33,4 +33,17 @@ export class AuthService {
 
     return { accessToken };
   }
+
+  async steamLogin(req): Promise<any> {
+    console.log(req.user._json.steamid);
+    const username: string = req.user._json.steamid;
+    if (!req) {
+      return 'No user was provided from Steam';
+    }
+
+    const payload: JwtPayload = { username };
+    const accessToken = await this.jwtService.sign(payload);
+
+    return { accessToken };
+  }
 }
