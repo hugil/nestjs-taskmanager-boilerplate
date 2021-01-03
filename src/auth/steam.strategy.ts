@@ -1,17 +1,10 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { PassportStrategy } from '@nestjs/passport';
-import { InjectRepository } from '@nestjs/typeorm';
 import { Strategy } from 'passport-steam';
-import { JwtPayload } from './jwt-payload.interface';
-import { User } from './user.entity';
-import { UserRepository } from './user.repository';
 
 @Injectable()
 export class SteamStrategy extends PassportStrategy(Strategy, 'steam') {
-  constructor(
-    @InjectRepository(UserRepository)
-    private userRepository: UserRepository,
-  ) {
+  constructor() {
     super({
       apiKey: '', //Enter API key here from https://steamcommunity.com/dev/apikey
       realm: 'http://localhost:3000/',
